@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">testingmap</string>
+    <string name="action_settings">Settings</string>
+    <string name="acces_token">pk.eyJ1Ijoic3JpbmF0aDI0NjgiLCJhIjoiY2ozdmEzN3VqMDAzaDN1bG1rdXdibm53MSJ9.1ZueZJd1Yb8fBCUS1myzRQ</string>
+    <string name="button_1">HELP</string>
+    <string name="button_2">SERVICE</string>
+    <string name="button_3">DIAGNOSTICS</string>
+    <string name="button_4">MIRROR</string>
+    <string name="button_5">USER MANUAL</string>
+    <string name="button_6">COMPACT MODE</string>
+    <string name="button_call">POLICE</string>
+    <string name="button_tow">TOW TRUCK</string>
+    <string name="button_amb">AMBULANCE</string>
+    <string name="button_wa">WHATSAPP</string>
+    <string name="button_map">NAVIGATE</string>
+    <string name="button_fac">FACEBOOK</string>
+</resources>
