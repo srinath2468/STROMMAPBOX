@@ -1,17 +1,19 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.android.application'
-
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    buildToolsVersion '25.0.2'
     defaultConfig {
-        applicationId "com.example.testingmap"
-        minSdkVersion 16
+        applicationId "com.mapbox.services.android.navigation.testapp"
+        minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
     buildTypes {
         release {
@@ -19,60 +21,41 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    // Mapbox Navigation SDK
+    compile project(':libandroid-navigation')
+    // Support libraries
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    // Mapbox Maps SDK
+    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.2@aar') {
+        transitive = true
+        exclude module: 'lost'
+        exclude module: 'mapbox-java-geojson'
+        exclude module: 'mapbox-android-telemetry'
+    }
+    // Logging
+    compile 'com.jakewharton.timber:timber:4.5.1'
+    // Butter Knife
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    // Leak Canary
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    // Testing
+    testCompile 'junit:junit:4.12'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.1'
-    testCompile 'junit:junit:4.12'
-    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.2@aar') {
-        exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-java-geojson'
-        exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-android-telemetry'
-        transitive=true
-    }
-}
-
-repositories {
-    mavenCentral()
-
-}
-
-repositories {
-    maven {
-        url 'https://maven.google.com'
-    }
-}
-// This is the main dependency for adding maps to the app
-dependencies {
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-}
-// This is the geocoder dependency
-dependencies {
-    compile ('com.mapbox.mapboxsdk:mapbox-android-geocoder:1.0.0@aar'){
-        transitive=true
-    }
-}
-//directions dependency
-dependencies {
-    compile ('com.mapbox.mapboxsdk:mapbox-android-directions:1.0.0@aar'){
-        transitive=true
-    }
-}
-
-dependencies {
-    compile ('com.mapbox.mapboxsdk:mapbox-android-services:2.1.1@aar'){
-        transitive=true
-    }
 }
 dependencies {
     compile 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.3.1'
     compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.1'
-
 
     // Other dependencies
 
@@ -83,8 +66,18 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
 
 }
-android {
-    lintOptions {
-        abortOnError false
+
+dependencies {
+    compile('com.mapbox.mapboxsdk:mapbox-android-geocoder:1.0.0@aar') {
+        transitive = true
     }
+}
+
+apply from: 'developer-config.gradle'
+apply from: '../checkstyle.gradle'
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
 }
